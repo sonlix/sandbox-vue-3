@@ -14,6 +14,8 @@
 import { defineComponent } from 'vue';
 import lvl2PropsAndInject from './lvl2-props-and-inject.vue';
 import { IBook } from '../types';
+import store from "@/store"
+import { INote } from "@/store/types"
 
 interface IData {
   book: IBook,
@@ -38,6 +40,16 @@ export default defineComponent({
 
   components: {
     lvl2PropsAndInject,
+  },
+
+  mounted() {
+    store.dispatch("fetchCurrentNote", 1);
+
+    let note: INote = {
+      title: "1232131",
+      id: 10
+    };
+    store.dispatch("updateCurrentNote", note);
   },
 
   data():IData {
